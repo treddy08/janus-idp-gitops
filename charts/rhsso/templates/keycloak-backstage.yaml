@@ -1,6 +1,8 @@
 apiVersion: keycloak.org/v1alpha1
 kind: Keycloak
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
   labels:
     app: rhsso-backstage
     app.kubernetes.io/instance: rhsso-backstage
