@@ -3,7 +3,7 @@ kind: OperatorGroup
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-  generateName: backstageio-
+  name: og-{{ .Release.Namespace }}
 spec:
   targetNamespaces:
     - {{ .Release.Namespace }}
