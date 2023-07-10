@@ -6,12 +6,10 @@ metadata:
     app.kubernetes.io/name: backstage
   name: backstage
 spec:
-  clusterIP: None
   ports:
-    - name: http
-      port: 5432
-      protocol: TCP
-      targetPort: http
+  - name: http
+    port: 8080
+    targetPort: 4180
   selector:
     app.kubernetes.io/instance: backstage
-    app.kubernetes.io/name: backstage-postgres
+    app.kubernetes.io/name: backstage
