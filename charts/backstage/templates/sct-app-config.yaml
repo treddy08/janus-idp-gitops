@@ -35,10 +35,10 @@ stringData:
 
     integrations: {{- .Values.integrations | toYaml | trim }}
 
-    proxy:
-      '/test':
-        target: 'https://example.com'
-        changeOrigin: true
+    # proxy:
+    #   '/test':
+    #     target: 'https://example.com'
+    #     changeOrigin: true
 
     techdocs:
       builder: 'local' # Alternatives - 'external'
