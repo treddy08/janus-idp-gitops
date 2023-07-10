@@ -1,26 +1,26 @@
 image: quay.io/redhat-gpte/backstage:1.0.0
 
 app:
-  baseUrl: https://backstage-backstage.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+  baseUrl: https://backstage-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
 
 backend:
-  baseUrl: https://backstage-backstage.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+  baseUrl: https://backstage-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
   cors:
-    origin: https://backstage-backstage.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+    origin: https://backstage-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
   reading:
     allow:
-      - host: '*.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com'
+      - host: '*.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com'
 
 integrations:
   gitlab:
-    - host: gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
-      baseUrl: https://gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
-      apiBaseUrl: https://gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com/api/v4
-      token: 9iMzCbx5F5DiDdG78GKf
+    - host: gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
+      baseUrl: https://gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
+      apiBaseUrl: https://gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/api/v4
+      token: 5Ly5CoYQR568JB6DXM5t
 
 catalog:
   locations:
-  - target: https://gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com/backstage/software-templates/blob/main/showcase-templates.yaml
+  - target: https://gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/backstage/software-templates/blob/main/showcase-templates.yaml
     type: url
     rules:
       - allow: [Template]
@@ -30,19 +30,19 @@ argocd:
     - type: 'config'
       instances:
         - name: main
-          url: 	https://openshift-gitops-server-openshift-gitops.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+          url: 	https://openshift-gitops-server-openshift-gitops.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
           username: admin
-          password: VZILKh29Qsb50zFpNcHUJYi6WtDXBmwo
+          password: HBWnPN9cI8bQwSh7Ci2XFKfAlGpsmT1V
 
 keycloak:
-  baseUrl: https://keycloak-backstageio.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com/auth
+  baseUrl: https://keycloak-backstageio.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/auth
   loginRealm: backstage
   realm: backstage
   clientId: backstage
-  clientSecret: dr326lrW0lTLeBaqGH6VsahKjveVb4x0
+  clientSecret: ElpqhKthJY2EU28KAdIfcBrvvALwOFmP
 
 oauth2Proxy:
-  issuerUrl: https://keycloak-backstageio.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com/auth/realms/backstage
+  issuerUrl: https://keycloak-backstageio.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/auth/realms/backstage
   cookieSecret: b2JvZGtmZGJwamtpcW94aWl2cXZvaHRndGZmeXVrcG8=
   skipTlsVerify: "true"
 
