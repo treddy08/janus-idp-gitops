@@ -31,9 +31,20 @@ stringData:
       cache:
         store: memory
 
-      reading:  {{- .Values.backend.reading | toYaml | trim | nindent 4 }}
+      reading:
+        allow:
+{{- range $item := $.Values.backend.reading.allow }}
+          - host: '{{ $item.host }}'
+{{- end }}
 
-    integrations: {{- .Values.integrations | toYaml | trim }}
+    integrations:
+      gitlab:
+{{- range $item := $.Values.integrations. }}
+      - host: {{ $item.host }}
+        baseUrl: {{ $item.baseUrl }}
+        apiBaseUrl: {{ $item.apiBaseUrl }}
+        token: {{ $item.token }}
+{{- end }}
 
     techdocs:
       builder: 'local' # Alternatives - 'external'
@@ -50,8 +61,28 @@ stringData:
       # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
     catalog: {{- .Values.catalog | toYaml | trim }}
+      locations:
+{{- range $item := $.Values.catalog.locations }}
+        - target: {{ $item.target }}
+          type: {{ $item.type }}
+          rules:
+{{- range $item1 := $item.rules }}
+            - allow: {{ $item1.allow }}
+{{- end }}
+{{- end }}
 
-    argocd: {{- .Values.argocd | toYaml | trim | nindent 2 }}
+argocd:
+  appLocatorMethods:
+{{- range $item := $.Values.argocd.appLocatorMethods }}
+    - type: '{{ $item.type }}'
+      instances:
+{{- range $item1 := $item.instances }}
+        - name: {{ $item1.name }}
+          url: 	{{ $item1.url }}
+          username: {{ $item1.username }}
+          password: {{ $item1.password }}
+
+{{- end }}
 kind: Secret
 metadata:
   labels:
