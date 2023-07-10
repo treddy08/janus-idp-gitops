@@ -71,16 +71,16 @@ stringData:
 {{- end }}
 {{- end }}
 
-argocd:
-  appLocatorMethods:
+    argocd:
+      appLocatorMethods:
 {{- range $item := $.Values.argocd.appLocatorMethods }}
-    - type: '{{ $item.type }}'
-      instances:
+        - type: '{{ $item.type }}'
+          instances:
 {{- range $item1 := $item.instances }}
-        - name: {{ $item1.name }}
-          url: 	{{ $item1.url }}
-          username: {{ $item1.username }}
-          password: {{ $item1.password }}
+            - name: {{ $item1.name }}
+              url: 	{{ $item1.url }}
+              username: {{ $item1.username }}
+              password: {{ $item1.password }}
 {{- end }}
 {{- end }}
 kind: Secret
