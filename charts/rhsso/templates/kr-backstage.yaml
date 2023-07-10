@@ -27,6 +27,8 @@ spec:
         firstBrokerLoginFlowAlias: first broker login
         config:
           clientId: "{{ $item.clientId }}"
+          tokenUrl: "{{ $item.tokenUrl }}"
+
 {{- end }}
     realm: backstage
 status:
