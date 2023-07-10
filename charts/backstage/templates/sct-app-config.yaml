@@ -81,7 +81,6 @@ argocd:
           url: 	{{ $item1.url }}
           username: {{ $item1.username }}
           password: {{ $item1.password }}
-
 {{- end }}
 kind: Secret
 metadata:
