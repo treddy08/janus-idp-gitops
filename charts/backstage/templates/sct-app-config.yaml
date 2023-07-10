@@ -82,6 +82,7 @@ argocd:
           username: {{ $item1.username }}
           password: {{ $item1.password }}
 {{- end }}
+{{- end }}
 kind: Secret
 metadata:
   labels:
