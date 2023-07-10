@@ -27,12 +27,6 @@ spec:
         firstBrokerLoginFlowAlias: first broker login
         config:
           clientId: "{{ $item.clientId }}"
-          #tokenUrl: "{{ $item.tokenUrl }}"
-          #authorizationUrl: "{{ $item.authorizationUrl }}"
-          #clientAuthMethod: "{{ $.Values.realm.identityProviders[0].clientAuthMethod }}"
-          #syncMode: IMPORT
-          #clientSecret: "{{ $item.clientSecret }}"
-          #useJwksUrl: 'true'
 {{- end }}
     realm: backstage
 status:
