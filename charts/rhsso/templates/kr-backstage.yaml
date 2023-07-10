@@ -35,8 +35,3 @@ spec:
           useJwksUrl: 'true'
 {{- end }}
     realm: backstage
-status:
-  loginURL: ''
-  message: ''
-  phase: reconciling
-  ready: true
