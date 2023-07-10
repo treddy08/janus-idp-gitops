@@ -17,7 +17,7 @@ spec:
     enabled: true
     id: backstage
     identityProviders:
-{{- range $item := .Values.realm.identityProviders }}
+{{- range $item := $.Values.realm.identityProviders }}
       - alias: "{{ $item.alias }}"
         providerId: "{{ $item.providerId }}"
         enabled: true
