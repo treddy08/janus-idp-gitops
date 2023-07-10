@@ -39,7 +39,7 @@ stringData:
 
     integrations:
       gitlab:
-{{- range $item := $.Values.integrations. }}
+{{- range $item := $.Values.integrations.gitlab }}
       - host: {{ $item.host }}
         baseUrl: {{ $item.baseUrl }}
         apiBaseUrl: {{ $item.apiBaseUrl }}
@@ -60,7 +60,7 @@ stringData:
     scaffolder:
       # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
-    catalog: {{- .Values.catalog | toYaml | trim }}
+    catalog:
       locations:
 {{- range $item := $.Values.catalog.locations }}
         - target: {{ $item.target }}
