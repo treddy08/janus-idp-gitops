@@ -20,7 +20,7 @@ integrations:
 
 catalog:
   locations:
-  - target: https://gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/backstage/software-templates/blob/main/showcase-templates.yaml
+  - target: https://gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/janus-idp/software-templates/blob/main/showcase-templates.yaml
     type: url
     rules:
       - allow: [Template]
