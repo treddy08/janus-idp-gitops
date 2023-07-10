@@ -23,7 +23,6 @@ spec:
         enabled: true
         trustEmail: true
         storeToken: false
-        addReadTokenRoleOnCreate: false
         linkOnly: false
         firstBrokerLoginFlowAlias: first broker login
         config:
