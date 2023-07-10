@@ -35,14 +35,14 @@ argocd:
           password: HBWnPN9cI8bQwSh7Ci2XFKfAlGpsmT1V
 
 keycloak:
-  baseUrl: https://keycloak-backstageio.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/auth
+  baseUrl: https://keycloak-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/auth
   loginRealm: backstage
   realm: backstage
   clientId: backstage
   clientSecret: ElpqhKthJY2EU28KAdIfcBrvvALwOFmP
 
 oauth2Proxy:
-  issuerUrl: https://keycloak-backstageio.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/auth/realms/backstage
+  issuerUrl: https://keycloak-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/auth/realms/backstage
   cookieSecret: b2JvZGtmZGJwamtpcW94aWl2cXZvaHRndGZmeXVrcG8=
   skipTlsVerify: "true"
 
