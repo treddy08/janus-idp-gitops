@@ -6,6 +6,8 @@ metadata:
     app: rhsso-backstage
     app.kubernetes.io/instance: rhsso-backstage
     app.kubernetes.io/name: rhsso-backstage
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   instanceSelector:
     matchLabels:
