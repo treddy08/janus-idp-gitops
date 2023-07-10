@@ -24,10 +24,10 @@ spec:
         trustEmail: true
         firstBrokerLoginFlowAlias: first broker login
         config:
-          clientId: {{ $item.clientId }}
-          tokenUrl: {{ $item.tokenUrl }}
-          authorizationUrl: {{ $item.authorizationUrl }}
-          clientAuthMethod: {{ $item.clientAuthMethod }}
+          clientId: "{{ $item.clientId }}"
+          tokenUrl: "{{ $item.tokenUrl }}"
+          authorizationUrl: "{{ $item.authorizationUrl }}"
+          clientAuthMethod: "{{ $item.clientAuthMethod }}"
           syncMode: IMPORT
           clientSecret: "{{ $item.clientSecret }}"
           useJwksUrl: 'true'
