@@ -18,8 +18,8 @@ spec:
     id: backstage
     identityProviders:
 {{- range $item := .Values.realm.identityProviders }}
-      - alias: {{ $item.alias }}
-        providerId: {{ $item.providerId }}
+      - alias: "{{ $item.alias }}"
+        providerId: "{{ $item.providerId }}"
         enabled: true
         trustEmail: true
         firstBrokerLoginFlowAlias: first broker login
