@@ -71,7 +71,7 @@ spec:
               key: databasePassword
               name: backstage-postgresql
         - name: POSTGRES_HOST
-          value: backstage-postgresql.backstageio.svc
+          value: backstage-postgresql.{{ $.Release.Namespace }}.svc
         - name: POSTGRES_USER
           value: postgres
         - name: POSTGRES_PORT
