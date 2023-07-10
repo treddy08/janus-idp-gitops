@@ -1,0 +1,10 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: backstage-postgresql
+  labels:
+    app.kubernetes.io/instance: backstage
+    app.kubernetes.io/name: backstage-postgres
+stringData:
+  databasePassword: {{ $.Values.postgresql.password }}
+type: Opaque

@@ -3,12 +3,8 @@ kind: StatefulSet
 metadata:
   labels:
     app.kubernetes.io/instance: backstage
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: backstage-postgres
-    app.kubernetes.io/version: v1.7.0
-    helm.sh/chart: backstage-0.1.6
   name: backstage-postgresql
-  namespace: backstageio
 spec:
   podManagementPolicy: OrderedReady
   replicas: 1
@@ -40,8 +36,6 @@ spec:
         - containerPort: 5432
           name: tcp-postgresql
           protocol: TCP
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: postgresdb
@@ -50,7 +44,6 @@ spec:
       schedulerName: default-scheduler
       serviceAccount: backstage-postgresql
       serviceAccountName: backstage-postgresql
-      terminationGracePeriodSeconds: 30
       volumes:
       - name: postgresdb
         persistentVolumeClaim:

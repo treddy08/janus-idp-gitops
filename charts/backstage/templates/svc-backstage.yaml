@@ -3,20 +3,9 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/instance: backstage
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: backstage
-    app.kubernetes.io/version: v1.7.0
-    helm.sh/chart: backstage-0.1.6
   name: backstage
-  namespace: backstageio
 spec:
-  clusterIP: 172.30.57.225
-  clusterIPs:
-  - 172.30.57.225
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
   ports:
   - name: http
     port: 8080

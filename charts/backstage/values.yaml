@@ -1,0 +1,53 @@
+image: quay.io/redhat-gpte/backstage:1.0.0
+
+app:
+  baseUrl: https://backstage-backstage.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+
+backend:
+  baseUrl: https://backstage-backstage.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+  cors:
+    origin: https://backstage-backstage.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+  reading:
+    allow:
+      - host: '*.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com'
+
+integrations:
+  gitlab:
+    - host: gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+      baseUrl: https://gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+      apiBaseUrl: https://gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com/api/v4
+      token: 9iMzCbx5F5DiDdG78GKf
+
+catalog:
+  locations:
+  - target: https://gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com/backstage/software-templates/blob/main/showcase-templates.yaml
+    type: url
+    rules:
+      - allow: [Template]
+
+argocd:
+  appLocatorMethods:
+    - type: 'config'
+      instances:
+        - name: main
+          url: 	https://openshift-gitops-server-openshift-gitops.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
+          username: admin
+          password: VZILKh29Qsb50zFpNcHUJYi6WtDXBmwo
+
+keycloak:
+  baseUrl: https://keycloak-backstageio.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com/auth
+  loginRealm: backstage
+  realm: backstage
+  clientId: backstage
+  clientSecret: dr326lrW0lTLeBaqGH6VsahKjveVb4x0
+
+oauth2Proxy:
+  issuerUrl: https://keycloak-backstageio.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com/auth/realms/backstage
+  cookieSecret: b2JvZGtmZGJwamtpcW94aWl2cXZvaHRndGZmeXVrcG8=
+  skipTlsVerify: "true"
+
+postgresql:
+  password: postgres
+
+
+
