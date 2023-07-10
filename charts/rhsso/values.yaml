@@ -15,3 +15,6 @@ realm:
       clientAuthMethod: client_secret_basic
       syncMode: IMPORT
       clientSecret: "70c338be23d67a9c992234bc07cb922c2302f2d8a5d24b97e9aa9019517bccb9"
+client:
+  redirectUri:
+  - https://backstage-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/oauth2/callback

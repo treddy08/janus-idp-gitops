@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/instance: backstage
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: backstage-postgres
+    app.kubernetes.io/version: v1.7.0
+    helm.sh/chart: backstage-0.1.6
+  name: backstage-postgresql
+  namespace: backstageio
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: backstage
+      app.kubernetes.io/name: backstage-postgres
+  serviceName: backstage-postgresql
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: backstage
+        app.kubernetes.io/name: backstage-postgres
+      name: backstage-postgresql
+    spec:
+      containers:
+      - env:
+        - name: POSTGRESQL_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: databasePassword
+              name: backstage-postgresql
+        image: quay.io/fedora/postgresql-13:13
+        imagePullPolicy: Always
+        name: postgresql
+        ports:
+        - containerPort: 5432
+          name: tcp-postgresql
+          protocol: TCP
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgresdb
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      serviceAccount: backstage-postgresql
+      serviceAccountName: backstage-postgresql
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: postgresdb
+        persistentVolumeClaim:
+          claimName: backstage-postgresql
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
