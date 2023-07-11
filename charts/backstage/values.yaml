@@ -24,6 +24,10 @@ catalog:
     type: url
     rules:
       - allow: [Template]
+  providers:
+    gitlab:
+      selfHosted:
+        host: gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
 
 argocd:
   appLocatorMethods:
