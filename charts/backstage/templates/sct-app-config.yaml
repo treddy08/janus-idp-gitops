@@ -90,6 +90,9 @@ stringData:
               url: 	{{ $item1.url }}
               username: {{ $item1.username }}
               password: {{ $item1.password }}
+    enabled:
+      techdocs: true
+      argocd: true
 {{- end }}
 {{- end }}
 kind: Secret
@@ -102,7 +105,3 @@ metadata:
     helm.sh/chart: backstage-0.1.6
   name: backstage-config
 type: Opaque
-
-enabled:
-  techdocs: true
-  argocd: true
