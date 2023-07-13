@@ -102,3 +102,7 @@ metadata:
     helm.sh/chart: backstage-0.1.6
   name: backstage-config
 type: Opaque
+
+enabled:
+  techdocs: true
+  argocd: true
