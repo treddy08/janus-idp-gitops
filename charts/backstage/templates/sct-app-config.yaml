@@ -115,7 +115,7 @@ stringData:
           plural: 'taskruns'
 
     enabled:
-      techdocs: true
+      kubernetes: true
       argocd: true
 kind: Secret
 metadata:
