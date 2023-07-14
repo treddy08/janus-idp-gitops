@@ -90,11 +90,33 @@ stringData:
               url: 	{{ $item1.url }}
               username: {{ $item1.username }}
               password: {{ $item1.password }}
+{{- end }}
+{{- end }}
+
+    kubernetes:
+      serviceLocatorMethod:
+        type: "multiTenant"
+      clusterLocatorMethods:
+        - type: "config"
+          clusters:
+{{- range $item := $.Values.clusters }}
+            - name: {{ $item.name }}
+              url: {{ $item.url }}
+              authProvider: "serviceAccount"
+              skipTLSVerify: true
+              serviceAccountToken: "{{ $item.serviceAccountToken }}"
+{{- end }}
+      customResources:
+        - group: 'tekton.dev'
+          apiVersion: 'v1beta1'
+          plural: 'pipelineruns'
+        - group: 'tekton.dev'
+          apiVersion: 'v1beta1'
+          plural: 'taskruns'
+
     enabled:
-      techdocs: true
+      kubernetes: true
       argocd: true
-{{- end }}
-{{- end }}
 kind: Secret
 metadata:
   labels:
