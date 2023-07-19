@@ -119,6 +119,7 @@ stringData:
     enabled:
       kubernetes: true
       techdocs: true
+      ocm: false
       argocd: true
 kind: Secret
 metadata:
