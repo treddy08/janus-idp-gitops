@@ -1,4 +1,4 @@
-image: quay.io/redhat-gpte/backstage:1.0.0
+image: quay.io/redhat-gpte/backstage:1.0.1
 
 app:
   baseUrl: https://backstage-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
