@@ -29,6 +29,10 @@ catalog:
       selfHosted:
         host: gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
 
+quay:
+  host: https://quay-p4pl8.apps.cluster-ckvl7.ckvl7.sandbox473.opentlc.com
+  token: XXX
+
 argocd:
   appLocatorMethods:
     - type: 'config'

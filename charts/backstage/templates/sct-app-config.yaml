@@ -46,6 +46,21 @@ stringData:
         token: {{ $item.token }}
 {{- end }}
 
+  proxy:
+    '/quay/api':
+      target: '{{ $.Values.quay.host }}'
+      headers:
+        X-Requested-With: 'XMLHttpRequest'
+        # Uncomment the following line to access a private Quay Repository using a token
+        Authorization: 'Bearer {{ $.Values.quay.token }}'
+      changeOrigin: true
+      # Change to "false" in case of using self hosted quay instance with a self-signed certificate
+      secure: false
+
+  quay:
+    # The UI url for Quay, used to generate the link to Quay
+    uiUrl: '{{ $.Values.quay.host }}'
+
     techdocs:
       builder: 'local' # Alternatives - 'external'
       generator:
