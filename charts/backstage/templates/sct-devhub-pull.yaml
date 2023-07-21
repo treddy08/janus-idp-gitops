@@ -1,0 +1,7 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: redhat-gpte-devhub-pull-secret
+data:
+  .dockerconfigjson: {{ $.Values.pullsecret }}
+type: kubernetes.io/dockerconfigjson

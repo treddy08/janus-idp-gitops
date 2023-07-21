@@ -2,3 +2,5 @@ kind: ServiceAccount
 apiVersion: v1
 metadata:
   name: backstage
+imagePullSecrets:
+  - name: redhat-gpte-devhub-pull-secret
