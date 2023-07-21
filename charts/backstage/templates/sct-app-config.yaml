@@ -134,8 +134,14 @@ stringData:
     enabled:
       kubernetes: true
       techdocs: true
-      ocm: false
       argocd: true
+      sonarqube: false
+      keycloak: true
+      ocm: false
+      github: false
+      githubOrg: false
+      gitlab: true
+      jenkins: false
 kind: Secret
 metadata:
   labels:
