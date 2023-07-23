@@ -145,7 +145,7 @@ stringData:
       argocd: true
       sonarqube: false
       keycloak: true
-      ocm: false
+      ocm: true
       github: false
       githubOrg: false
       gitlab: true
