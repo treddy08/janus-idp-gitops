@@ -99,7 +99,7 @@ stringData:
         ocm:
           env:
 {{- range $item := $.Values.clusters }}
-            kubernetesPluginRef: {{ $.Values.clusters[0].name }}
+            kubernetesPluginRef: {{ $.Values.clusters[1].name }}
 {{- end }}
             schedule: # optional; same options as in TaskScheduleDefinition
               # supports cron, ISO duration, "human duration" as used in code
