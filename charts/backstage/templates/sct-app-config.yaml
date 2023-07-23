@@ -98,7 +98,7 @@ stringData:
               timeout: { seconds: 60 }
         ocm:
           env:
-            kubernetesPluginRef: dev-cluster-infra
+            kubernetesPluginRef: {{ .Values.clusters[0].name }}
             schedule: # optional; same options as in TaskScheduleDefinition
               # supports cron, ISO duration, "human duration" as used in code
               frequency: { seconds: 10 }
