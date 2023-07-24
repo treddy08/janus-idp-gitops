@@ -140,6 +140,9 @@ stringData:
         - group: 'tekton.dev'
           apiVersion: 'v1beta1'
           plural: 'taskruns'
+        - group: 'route.openshift.io'
+          apiVersion: 'v1'
+          plural: 'routes'
 
     enabled:
       kubernetes: true
