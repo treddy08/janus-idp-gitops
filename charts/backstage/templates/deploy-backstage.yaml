@@ -20,7 +20,19 @@ spec:
         - packages/backend
         - --config
         - /config/app-config.yaml
+        envFrom:
+          - configMapRef:
+              name: backstage-bucket-claim
+          - secretRef:
+              name: backstage-bucket-claim
         env:
+        - name: BUCKET_URL
+          value: {{ $.Values.techdocs.s3Route }}
+        - name: AWS_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: backstage-bucket-claim
+              key: BUCKET_REGION
         - name: POSTGRES_ADMIN_PASSWORD
           valueFrom:
             secretKeyRef:
