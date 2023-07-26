@@ -1,0 +1,15 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: backstage-data
+  labels:
+    app.kubernetes.io/instance: backstage
+    app.kubernetes.io/name: backstage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: gp3-csi
+  volumeMode: Filesystem
