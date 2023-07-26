@@ -93,8 +93,6 @@ spec:
         - mountPath: /config
           name: backstage-config
           readOnly: true
-        - name: backstage-data
-          mountPath: /var/lib/pgsql/data
       - args:
         - --provider=oidc
         - --email-domain=*
@@ -146,6 +144,3 @@ spec:
         secret:
           defaultMode: 420
           secretName: backstage-config
-      - name: backstage-data
-        persistentVolumeClaim:
-          claimName: backstage-data
