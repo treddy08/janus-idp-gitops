@@ -7,7 +7,7 @@ stringData:
       baseUrl: {{ $.Values.app.baseUrl }}
 
     organization:
-      name: "Red Hat Backstage Helm Chart"
+      name: "Red Hat Developer Hub"
 
     backend:
       baseUrl: {{ $.Values.backend.baseUrl }}
