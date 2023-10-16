@@ -119,6 +119,7 @@ stringData:
               frequency: { seconds: 10 }
               # supports ISO duration, "human duration" as used in code
               timeout: { seconds: 60 }
+            owner: group:rhdh
 
     argocd:
       appLocatorMethods:
