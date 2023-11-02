@@ -10,6 +10,9 @@ stringData:
     organization:
       name: "Red Hat Developer Hub"
 
+    dynamicPlugins:
+      rootDirectory: dynamic-plugins-root
+
     backend:
       auth:
         keys:
