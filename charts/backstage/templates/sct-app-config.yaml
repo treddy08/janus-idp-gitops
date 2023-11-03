@@ -12,6 +12,7 @@ stringData:
 
     dynamicPlugins:
       rootDirectory: dynamic-plugins-root
+      frontend: {}
 
     backend:
       auth:
