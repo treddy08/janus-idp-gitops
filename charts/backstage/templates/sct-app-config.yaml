@@ -12,7 +12,9 @@ stringData:
 
     dynamicPlugins:
       rootDirectory: dynamic-plugins-root
-      frontend: {}
+
+    permission:
+      enabled: false
 
     backend:
       auth:
@@ -173,6 +175,7 @@ stringData:
       githubOrg: false
       gitlab: true
       jenkins: false
+      permission: false
 kind: Secret
 metadata:
   labels:
