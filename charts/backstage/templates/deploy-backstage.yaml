@@ -20,6 +20,8 @@ spec:
         - packages/backend
         - --config
         - /config/app-config.yaml
+        - --config
+        - /config/app-config.dyamic-plugins.yaml
         envFrom:
           - configMapRef:
               name: backstage-bucket-claim
