@@ -2,6 +2,8 @@ kind: Secret
 apiVersion: v1
 metadata:
   name: redhat-gpte-devhub-pull-secret
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 data:
-  .dockerconfigjson: {{ $.Values.pullSecret }}
+  .dockerconfigjson: {{ $.Values.demo.dependencies.devhub.pullSecret }}
 type: kubernetes.io/dockerconfigjson

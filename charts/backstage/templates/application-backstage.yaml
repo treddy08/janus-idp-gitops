@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backstage
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: backstage
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    chart: '{{ .Values.demo.dependencies.app.chart }}'
+    helm:
+      valueFiles:
+      - {{ .Values.demo.dependencies.app.valuesFile }}
+    repoURL: '{{ .Values.demo.dependencies.app.repo }}'
+    targetRevision: HEAD

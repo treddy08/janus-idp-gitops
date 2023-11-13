@@ -5,6 +5,8 @@ metadata:
   labels:
     app.kubernetes.io/instance: backstage
     app.kubernetes.io/name: backstage-postgres
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 stringData:
   databasePassword: {{ $.Values.postgresql.password }}
 type: Opaque
