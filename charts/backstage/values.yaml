@@ -1,0 +1,10 @@
+backstage:
+  postgresql:
+    password: password
+  image:
+    pullSecret: ''
+  app:
+    repoURL: https://janus-idp.github.io/helm-backstage
+    chart: backstage
+    valueFile: https://gitlab-gitlab.apps.cluster-5bkcl.sandbox3056.opentlc.com/development/test-helm/-/raw/main/backstage-values.yaml
+    targetRevision: 2.10.3
