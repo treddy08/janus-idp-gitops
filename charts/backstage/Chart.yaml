@@ -1,6 +1,6 @@
 apiVersion: v2
-name: janus-backstage
-description: A Helm chart to deploy Janus for Janus-IDP-Demo on Kubernetes
+name: backstage-gitops
+description: A Helm chart to deploy RHDH and all dependencies
 type: application
 
 version: 0.1.0

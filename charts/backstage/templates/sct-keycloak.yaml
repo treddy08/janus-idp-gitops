@@ -1,9 +1,0 @@
-kind: Secret
-apiVersion: v1
-metadata:
-  name: backstage-keycloak-creds
-stringData:
-  oauth.cookieSecret: {{ $.Values.oauth2Proxy.cookieSecret }}
-  rhsso.clientId: {{ $.Values.keycloak.clientId }}
-  rhsso.clientSecret: {{ $.Values.keycloak.clientSecret }}
-type: Opaque

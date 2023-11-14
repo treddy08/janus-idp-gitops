@@ -1,67 +1,10 @@
-image: quay.io/redhat-gpte/backstage:1.0.1
-pullSecret: xxx
-
-app:
-  baseUrl: https://backstage-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
-
-backend:
-  baseUrl: https://backstage-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
-  cors:
-    origin: https://backstage-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
-  reading:
-    allow:
-      - host: '*.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com'
-
-integrations:
-  gitlab:
-    - host: gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
-      baseUrl: https://gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
-      apiBaseUrl: https://gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/api/v4
-      token: 5Ly5CoYQR568JB6DXM5t
-
-catalog:
-  locations:
-  - target: https://gitlab-gitlab.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/janus-idp/software-templates/blob/main/showcase-templates.yaml
-    type: url
-    rules:
-      - allow: [Template]
-  providers:
-    gitlab:
-      selfHosted:
-        host: gitlab-gitlab.apps.cluster-br9rv.br9rv.sandbox1083.opentlc.com
-
-quay:
-  host: https://quay-p4pl8.apps.cluster-ckvl7.ckvl7.sandbox473.opentlc.com
-  token: XXX
-
-argocd:
-  appLocatorMethods:
-    - type: 'config'
-      instances:
-        - name: main
-          url: 	https://openshift-gitops-server-openshift-gitops.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com
-          username: admin
-          password: HBWnPN9cI8bQwSh7Ci2XFKfAlGpsmT1V
-
-keycloak:
-  baseUrl: https://keycloak-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/auth
-  loginRealm: backstage
-  realm: backstage
-  clientId: backstage
-  clientSecret: ElpqhKthJY2EU28KAdIfcBrvvALwOFmP
-
-oauth2Proxy:
-  issuerUrl: https://keycloak-backstage.apps.cluster-ctmxg.ctmxg.sandbox430.opentlc.com/auth/realms/backstage
-  cookieSecret: b2JvZGtmZGJwamtpcW94aWl2cXZvaHRndGZmeXVrcG8=
-  skipTlsVerify: "true"
-
-postgresql:
-  password: postgres
-
-clusters:
-  - name: dev-cluster-infra
-    url: https://api.cluster-s5htd.sandbox1683.opentlc.com:6443
-    serviceAccountToken: "eyJhbGciOiJSUzI1NiIsImtpZCI6Iks5OXFnSExncndoTUZfaThucWpwalZTdll3Q1JZUlNiUUZ4YXNRS0NzWEUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJiYWNrc3RhZ2UiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiYmFja3N0YWdlLXRva2VuLTIyN3RnIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImJhY2tzdGFnZSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjE0NGZhNDhhLWEzM2MtNDAzOS05YzFhLWM3YTdjNWQ4NzFkNiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpiYWNrc3RhZ2U6YmFja3N0YWdlIn0.gQZ4zm3a11qybKowLZxDu8ljwj1S5_OGdfZBjr-Px99UXcAcaE5llzPxJ30WtxbmAjmwjxRhy7qbjbRl3oPxKIiOMPjkFk1ON5u1tSdhKt9Z4zZBJHSOYCoxLTp4dgNp_vlps55-eiIfu7vnA42q2rMjqabkkICN8BSXM2AgY2fKQspvKlv7E_hBeL3Ck1oPY1yyoPrjBdMSoP9x79E_wAlmduguFX8R3UPukMeQsfwoXJ-kzBFLFK87e220lDeW4AJqKlJBEj7wPfBTmeOiwaoEfmfkMgw9QxcKfLXJwsgffgCoSJG8kyonUwHQpc5TDheDeR2OxDJIl-zjWHvUDOPykpslxGMVFLdqU-o6TYX1LTm5OV4EgZ965J3wKWnuCGHFFjCgRfRPBCYmbohSKZ4nDqL6IHbIeq17r3jd9tSI_krZHvV1q54L2DU9DrGCLwjfaOKIvI0hVmMUVzdEs0EK8puKZO46fs1MQpI5n-BZqIfT1TTkudP1ya6QynTRJ4tPFwIqut4R0ECPwt76jhjOPJ9bHCKVJUhASeiF3HhbCiH5SRLd3sgsLZFjQHvQjteU8HvskJMnO0Bw7C68YbtMUEZqWLcqs91wjJvZxlZuzk-4GR-w74gsBfxZQqSa9sBmQWscelrOdegmzaKDfp2faPJK50TXbomaQ3oxp_Y"
-
-techdocs:
-  s3Route: xxxx
+backstage:
+  postgresql:
+    password: password
+  image:
+    pullSecret: ''
+  app:
+    repoURL: https://janus-idp.github.io/helm-backstage
+    chart: backstage
+    valueFile: https://gitlab-gitlab.apps.cluster-5bkcl.sandbox3056.opentlc.com/development/test-helm/-/raw/main/backstage-values.yaml
+    targetRevision: 2.10.3
