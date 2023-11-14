@@ -13,7 +13,7 @@ spec:
     helm:
       valueFiles:
         - {{ .Values.backstage.app.valueFile }}
-    repoURL: {{ .Values.backstage.app.repoUrl }}
+    repoURL: {{ .Values.backstage.app.repoURL }}
     targetRevision: {{ .Values.backstage.app.targetRevision }}
   syncPolicy:
     automated:
