@@ -63,6 +63,8 @@ global:
         disabled: false
       - package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-quay
         disabled: false
+      - package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
+        disabled: false
 
 upstream:
   backstage:
@@ -178,6 +180,12 @@ upstream:
               Authorization: 'Bearer {{ ocp4_workload_redhat_developer_hub_quay_admin_token }}'
             changeOrigin: true
             # Change to "false" in case of using self hosted quay instance with a self-signed certificate
+            secure: false
+          '/developer-hub':
+            target: https://{{ ocp4_workload_redhat_developer_hub_gitlab_host }}/
+            pathRewrite:
+              '^/api/proxy/developer-hub/tech-radar': /gitops/janus-idp-gitops/-/raw/main/config/tech-radar.json
+            changeOrigin: true
             secure: false
 
       quay:
