@@ -6,7 +6,7 @@ global:
   auth:
     backend:
       enabled: true
-  clusterRouterBase: {{ ocp4_workload_trusted_application_pipeline_pipeline_apps_domain }}
+  clusterRouterBase: {{ ocp4_workload_trusted_application_pipeline_apps_domain }}
   dynamic:
     includes:
       - dynamic-plugins.default.yaml
