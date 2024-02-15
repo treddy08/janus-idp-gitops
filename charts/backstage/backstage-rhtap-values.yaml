@@ -6,7 +6,7 @@ global:
   auth:
     backend:
       enabled: true
-  clusterRouterBase: {{ ocp4_workload_trusted_application_apps_domain }}
+  clusterRouterBase: {{ ocp4_workload_trusted_application_pipeline_pipeline_apps_domain }}
   dynamic:
     includes:
       - dynamic-plugins.default.yaml
@@ -69,20 +69,20 @@ global:
 upstream:
   backstage:
     image:
-      registry: {{ ocp4_workload_trusted_application_backstage_image_registry }}
-      repository: {{ ocp4_workload_trusted_application_backstage_image_repository }}
-      tag: '{{ ocp4_workload_trusted_application_backstage_image_tag }}'
+      registry: {{ ocp4_workload_trusted_application_pipeline_backstage_image_registry }}
+      repository: {{ ocp4_workload_trusted_application_pipeline_backstage_image_repository }}
+      tag: '{{ ocp4_workload_trusted_application_pipeline_backstage_image_tag }}'
       pullSecrets:
       - redhat-gpte-devhub-pull-secret
     extraEnvVars:
       - name: BACKEND_SECRET
         value: "{{ '{{ randAlphaNum 24 | b64enc }}' }}"
       - name: 'APP_CONFIG_app_baseUrl'
-        value: 'https://{{ ocp4_workload_trusted_application_backstage_host }}'
+        value: 'https://{{ ocp4_workload_trusted_application_pipeline_backstage_host }}'
       - name: 'APP_CONFIG_backend_baseUrl'
-        value: 'https://{{ ocp4_workload_trusted_application_backstage_host }}'
+        value: 'https://{{ ocp4_workload_trusted_application_pipeline_backstage_host }}'
       - name: 'APP_CONFIG_backend_cors_origin'
-        value: 'https://{{ ocp4_workload_trusted_application_backstage_host }}'
+        value: 'https://{{ ocp4_workload_trusted_application_pipeline_backstage_host }}'
       - name: POSTGRES_ADMIN_PASSWORD
         valueFrom:
           secretKeyRef:
@@ -91,7 +91,7 @@ upstream:
       - name: NODE_TLS_REJECT_UNAUTHORIZED
         value: "0"
       - name: APP_CONFIG_catalog_providers_keycloakOrg_default_baseUrl
-        value: https://{{ ocp4_workload_trusted_application_keycloak_host }}/auth
+        value: https://{{ ocp4_workload_trusted_application_pipeline_keycloak_host }}/auth
       - name: APP_CONFIG_catalog_providers_keycloakOrg_default_loginRealm
         value: backstage
       - name: APP_CONFIG_catalog_providers_keycloakOrg_default_realm
@@ -124,7 +124,7 @@ upstream:
           - name: OAUTH2_PROXY_COOKIE_SECRET
             value: "{{ '{{ randAlpha 32 | lower | b64enc }}' }}"
           - name: OAUTH2_PROXY_OIDC_ISSUER_URL
-            value: https://{{ ocp4_workload_trusted_application_keycloak_host }}/auth/realms/backstage
+            value: https://{{ ocp4_workload_trusted_application_pipeline_keycloak_host }}/auth/realms/backstage
           - name: OAUTH2_PROXY_SSL_INSECURE_SKIP_VERIFY
             value: 'true'
         ports:
@@ -149,7 +149,7 @@ upstream:
         csp:
           connect-src: ["'self'", 'http:', 'https:']
         cors:
-          origin: https://{{ ocp4_workload_trusted_application_backstage_host }}
+          origin: https://{{ ocp4_workload_trusted_application_pipeline_backstage_host }}
           methods: [GET, POST, PUT, DELETE]
           credentials: true
         database:
@@ -161,28 +161,28 @@ upstream:
             password: "${POSTGRES_ADMIN_PASSWORD}"
         reading:
           allow:
-            - host: '*.{{ ocp4_workload_trusted_application_apps_domain }}'
+            - host: '*.{{ ocp4_workload_trusted_application_pipeline_apps_domain }}'
 
       integrations:
         gitlab:
-        - host: {{ ocp4_workload_trusted_application_gitlab_host }}
-          baseUrl: https://{{ ocp4_workload_trusted_application_gitlab_host }}
-          apiBaseUrl: https://{{ ocp4_workload_trusted_application_gitlab_host }}/api/v4
-          token: {{ ocp4_workload_trusted_application_gitlab_root_token }}
+        - host: {{ ocp4_workload_trusted_application_pipeline_gitlab_host }}
+          baseUrl: https://{{ ocp4_workload_trusted_application_pipeline_gitlab_host }}
+          apiBaseUrl: https://{{ ocp4_workload_trusted_application_pipeline_gitlab_host }}/api/v4
+          token: {{ ocp4_workload_trusted_application_pipeline_gitlab_root_token }}
 
       proxy:
         endpoints:
           '/quay/api':
-            target: 'https://{{ ocp4_workload_trusted_application_quay_host }}'
+            target: 'https://{{ ocp4_workload_trusted_application_pipeline_quay_host }}'
             headers:
               X-Requested-With: 'XMLHttpRequest'
               # Uncomment the following line to access a private Quay Repository using a token
-              Authorization: 'Bearer {{ ocp4_workload_trusted_application_quay_admin_token }}'
+              Authorization: 'Bearer {{ ocp4_workload_trusted_application_pipeline_quay_admin_token }}'
             changeOrigin: true
             # Change to "false" in case of using self hosted quay instance with a self-signed certificate
             secure: false
           '/developer-hub':
-            target: https://{{ ocp4_workload_trusted_application_gitlab_host }}/
+            target: https://{{ ocp4_workload_trusted_application_pipeline_gitlab_host }}/
             pathRewrite:
               '^/api/proxy/developer-hub/tech-radar': /gitops/janus-idp-gitops/-/raw/main/config/tech-radar.json
             changeOrigin: true
@@ -190,7 +190,7 @@ upstream:
 
       quay:
         # The UI url for Quay, used to generate the link to Quay
-        uiUrl: 'https://{{ ocp4_workload_trusted_application_quay_host }}'
+        uiUrl: 'https://{{ ocp4_workload_trusted_application_pipeline_quay_host }}'
 
       techdocs:
         builder: 'external'
@@ -199,13 +199,13 @@ upstream:
         publisher:
           type: 'awsS3'
           awsS3:
-            bucketName: {{ ocp4_workload_trusted_application_s3_bucket_name }}
-            region: {{ ocp4_workload_trusted_application_s3_bucket_region }}
-            endpoint: {{ ocp4_workload_trusted_application_s3_bucket_endpoint }}
+            bucketName: {{ ocp4_workload_trusted_application_pipeline_s3_bucket_name }}
+            region: {{ ocp4_workload_trusted_application_pipeline_s3_bucket_region }}
+            endpoint: {{ ocp4_workload_trusted_application_pipeline_s3_bucket_endpoint }}
             s3ForcePathStyle: true
             credentials:
-              accessKeyId: {{ ocp4_workload_trusted_application_s3_bucket_aws_access_key_id }}
-              secretAccessKey: {{ ocp4_workload_trusted_application_s3_bucket_aws_secret_access_key }}
+              accessKeyId: {{ ocp4_workload_trusted_application_pipeline_s3_bucket_aws_access_key_id }}
+              secretAccessKey: {{ ocp4_workload_trusted_application_pipeline_s3_bucket_aws_secret_access_key }}
 
       auth:
         environment: production
@@ -221,8 +221,8 @@ upstream:
         rules:
           - allow: [Component, System, API, Resource, Location, Template]
         locations:
-{% for location in ocp4_workload_trusted_application_gitlab_template_locations %}
-          - target: https://{{ ocp4_workload_trusted_application_gitlab_host }}/{{ location.group }}/{{ location.project }}/blob/{{ location.branch }}/{{ location.file }}
+{% for location in ocp4_workload_trusted_application_pipeline_gitlab_template_locations %}
+          - target: https://{{ ocp4_workload_trusted_application_pipeline_gitlab_host }}/{{ location.group }}/{{ location.project }}/blob/{{ location.branch }}/{{ location.file }}
             type: url
             rules:
               - allow: [{{ location.rules.allow }}]
@@ -230,7 +230,7 @@ upstream:
         providers:
           gitlab:
             selfHosted:
-              host: {{ ocp4_workload_trusted_application_gitlab_host }}
+              host: {{ ocp4_workload_trusted_application_pipeline_gitlab_host }}
               schedule: # optional; same options as in TaskScheduleDefinition
                 # supports cron, ISO duration, "human duration" as used in code
                 frequency: { seconds: 10 }
@@ -252,9 +252,9 @@ upstream:
           - type: 'config'
             instances:
               - name: main
-                url: 	https://{{ ocp4_workload_trusted_application_argocd_host }}
+                url: 	https://{{ ocp4_workload_trusted_application_pipeline_argocd_host }}
                 username: admin
-                password: {{ ocp4_workload_trusted_application_argocd_password }}
+                password: {{ ocp4_workload_trusted_application_pipeline_argocd_password }}
 
       kubernetes:
         serviceLocatorMethod:
@@ -263,10 +263,10 @@ upstream:
           - type: "config"
             clusters:
               - name: dev-cluster-infra
-                url: {{ ocp4_workload_trusted_application_ocp_api }}
+                url: {{ ocp4_workload_trusted_application_pipeline_ocp_api }}
                 authProvider: "serviceAccount"
                 skipTLSVerify: true
-                serviceAccountToken: {{ ocp4_workload_trusted_application_ocp_default_sa_token }}
+                serviceAccountToken: {{ ocp4_workload_trusted_application_pipeline_ocp_default_sa_token }}
         customResources:
           - group: 'tekton.dev'
             apiVersion: 'v1beta1'
@@ -331,7 +331,7 @@ upstream:
 
   ingress:
     enabled: true
-    host: {{ ocp4_workload_trusted_application_backstage_host }}
+    host: {{ ocp4_workload_trusted_application_pipeline_backstage_host }}
     tls:
       enabled: true
 
