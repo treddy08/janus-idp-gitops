@@ -139,7 +139,17 @@ upstream:
           - '--upstream=http://localhost:7007'
           - '--http-address=0.0.0.0:4180'
           - '--skip-provider-button'
-          - '--insecure-oidc-allow-unverified-email=true'
+          - '--insecure-oidc-allow-unverified-email=true'          
+    extraVolumes:
+      - name: dynamic-plugins-root
+        ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 2Gi
 
     appConfig:
       backend:
