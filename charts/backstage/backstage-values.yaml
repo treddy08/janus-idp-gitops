@@ -330,16 +330,6 @@ upstream:
       backend: 4180
       targetPort: oauth2-proxy
 
-  ingress:
-    enabled: true
-    host: {{ ocp4_workload_redhat_developer_hub_backstage_host }}
-    tls:
-      enabled: true
-
-  serviceAccount:
-    name: backstage
-    create: true
-
 route:
   enabled: true
   host: {{ ocp4_workload_redhat_developer_hub_backstage_host }}
