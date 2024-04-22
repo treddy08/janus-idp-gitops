@@ -330,6 +330,7 @@ upstream:
       targetPort: oauth2-proxy
 
 route:
+  enabled: true
   host: {{ ocp4_workload_trusted_application_pipeline_backstage_host }}
   tls:
     enabled: true
