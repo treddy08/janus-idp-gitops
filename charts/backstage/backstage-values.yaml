@@ -3,7 +3,6 @@
 #oc project backstage
 #helm install backstage backstage/backstage --values values.yaml
 global:
-  host: {{ ocp4_workload_redhat_developer_hub_backstage_host }}
   auth:
     backend:
       enabled: true
