@@ -329,12 +329,8 @@ upstream:
       backend: 4180
       targetPort: oauth2-proxy
 
-  ingress:
+route:
+  host: backstage-backstage.apps.cluster-prfn9.sandbox2650.opentlc.com
+  tls:
     enabled: true
-    host: {{ ocp4_workload_trusted_application_pipeline_backstage_host }}
-    tls:
-      enabled: true
-
-  serviceAccount:
-    name: backstage
-    create: true
+    termination: "edge"
