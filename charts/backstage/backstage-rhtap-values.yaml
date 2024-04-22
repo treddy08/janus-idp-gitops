@@ -330,7 +330,7 @@ upstream:
       targetPort: oauth2-proxy
 
 route:
-  host: backstage-backstage.apps.cluster-prfn9.sandbox2650.opentlc.com
+  host: {{ ocp4_workload_trusted_application_pipeline_backstage_host }}
   tls:
     enabled: true
     termination: "edge"
