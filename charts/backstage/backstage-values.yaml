@@ -338,3 +338,10 @@ upstream:
   serviceAccount:
     name: backstage
     create: true
+
+route:
+  enabled: true
+  host: {{ ocp4_workload_redhat_developer_hub_backstage_host }}
+  tls:
+    enabled: true
+    termination: "edge"
