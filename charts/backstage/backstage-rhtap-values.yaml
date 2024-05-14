@@ -75,6 +75,8 @@ upstream:
       pullSecrets:
       - redhat-gpte-devhub-pull-secret
     extraEnvVars:
+      - name: NODE_OPTIONS
+        value: --no-node-snapshot
       - name: BACKEND_SECRET
         value: "{{ '{{ randAlphaNum 24 | b64enc }}' }}"
       - name: 'APP_CONFIG_app_baseUrl'
