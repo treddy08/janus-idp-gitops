@@ -1,6 +1,6 @@
 subscription:
   channel: stable
-  installPlanApproval: Manual
+  installPlanApproval: Automatic
   name: rhsso-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
