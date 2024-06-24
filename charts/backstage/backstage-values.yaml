@@ -31,8 +31,10 @@ global:
         disabled: false
       - package: ./dynamic-plugins/dist/roadiehq-scaffolder-backend-argocd-dynamic
         disabled: false
-      - package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd
+      - package:  ./dynamic-plugins/dist/janus-idp-backstage-plugin-argocd
         disabled: false
+      - package: ./dynamic-plugins/dist/roadiehq-backstage-plugin-argo-cd
+        disabled: true
       - package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm
         disabled: false
       - package: ./dynamic-plugins/dist/janus-idp-backstage-plugin-ocm-backend-dynamic
@@ -144,6 +146,17 @@ upstream:
           - '--insecure-oidc-allow-unverified-email=true'          
 
     appConfig:
+      app:
+        branding:
+          theme:
+            light:
+              headerColor1: '#be0000'
+              headerColor2: '#f56d6d'
+              navigationIndicatorColor: '#be0000'
+            dark:
+              headerColor1: '#f56d6d'
+              headerColor2: '#f56d6d'
+              navigationIndicatorColor: '#be0000'
       backend:
         listen:
           port: 7007
