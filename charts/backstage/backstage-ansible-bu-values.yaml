@@ -180,7 +180,7 @@ upstream:
           - containerPort: 8000
     initContainers:
       - name: install-dynamic-plugins
-        image: {{ '{{ include "backstage.image" . }}' }}
+        image: '{{ "{{" }} include "backstage.image" . {{ "}}" }}'
         command:
           - ./install-dynamic-plugins.sh
           - /dynamic-plugins-root
