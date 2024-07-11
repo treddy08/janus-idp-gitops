@@ -138,6 +138,8 @@ upstream:
             name: keycloak-client-secret-backstage
       - name: LOG_LEVEL
         value: debug
+      - name: SKIP_INTEGRITY_CHECK
+        value: "true"
     extraContainers:
       - name: oauth2-proxy
         env:
