@@ -73,7 +73,7 @@ global:
         pluginConfig:
           dynamicPlugins:
             frontend:
-              janus-idp.backstage-plugin-ansible:
+              ansible.plugin-backstage-rhaap:
                 appIcons:
                   - importName: AnsibleLogo
                     name: AnsibleLogo
@@ -89,7 +89,7 @@ global:
         pluginConfig:
           dynamicPlugins:
             backend:
-              janus-idp.backstage-plugin-scaffolder-backend-module-ansible:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap:
                 mountPoints:
                   - importName: createAnsibleContentAction
                     mountPoint: entity.page.overview/cards
