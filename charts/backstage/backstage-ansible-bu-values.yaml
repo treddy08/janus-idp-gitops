@@ -67,6 +67,32 @@ global:
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
         disabled: false
+      - package: >-
+          http://ansible-plugin-registry-ansible-plugin-registry:8080/ansible-plugin-backstage-rhaap-0.0.4.tgz
+        disabled: false
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              janus-idp.backstage-plugin-ansible:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - package: >-
+          http://ansible-plugin-registry-ansible-plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-0.0.5.tgz
+        disabled: false
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              janus-idp.backstage-plugin-scaffolder-backend-module-ansible:
+                mountPoints:
+                  - importName: createAnsibleContentAction
+                    mountPoint: entity.page.overview/cards
 
 upstream:
   backstage:
@@ -143,7 +169,15 @@ upstream:
           - '--upstream=http://localhost:7007'
           - '--http-address=0.0.0.0:4180'
           - '--skip-provider-button'
-          - '--insecure-oidc-allow-unverified-email=true'          
+          - '--insecure-oidc-allow-unverified-email=true'
+      - image: 'ghcr.io/ansible/community-ansible-dev-tools:latest'
+        imagePullPolicy: IfNotPresent
+        command:
+          - adt
+          - server
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000
 
     appConfig:
       backend:
