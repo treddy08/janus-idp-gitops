@@ -68,7 +68,7 @@ global:
       - package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
         disabled: false
       - package: >-
-          http://ansible-plugin-registry.plugin-registries:8080/ansible-plugin-backstage-rhaap-0.0.6.tgz
+          http://ansible-plugin-registry.plugin-registries:8080/ansible-plugin-backstage-rhaap-0.0.5.tgz
         disabled: false
         pluginConfig:
           dynamicPlugins:
