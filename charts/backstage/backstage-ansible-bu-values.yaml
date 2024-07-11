@@ -224,6 +224,14 @@ upstream:
         reading:
           allow:
             - host: '*.{{ ocp4_workload_redhat_developer_hub_apps_domain }}'
+            
+      ansible:
+        creatorService:
+          baseUrl: 127.0.0.1
+          port: '8000'
+        devSpacesBaseUrl: {{ ocp4_workload_redhat_developer_hub_devspaces_host }}
+        pahUrl: https://hub-ansible-automation-platform.{{ ocp4_workload_redhat_developer_hub_apps_domain }}
+        aapUrl: https://controller-ansible-automation-platform.{{ ocp4_workload_redhat_developer_hub_apps_domain }}
 
       integrations:
         gitlab:
