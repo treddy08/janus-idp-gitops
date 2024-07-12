@@ -67,6 +67,32 @@ global:
         disabled: false
       - package: ./dynamic-plugins/dist/backstage-plugin-tech-radar
         disabled: false
+      - package: >-
+          http://ansible-plugin-registry.plugin-registries:8080/ansible-plugin-backstage-rhaap-0.0.5.tgz
+        disabled: false
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - package: >-
+          http://ansible-plugin-registry.plugin-registries:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-0.0.5.tgz
+        disabled: false
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap:
+                mountPoints:
+                  - importName: createAnsibleContentAction
+                    mountPoint: entity.page.overview/cards
 
 upstream:
   backstage:
@@ -143,7 +169,39 @@ upstream:
           - '--upstream=http://localhost:7007'
           - '--http-address=0.0.0.0:4180'
           - '--skip-provider-button'
-          - '--insecure-oidc-allow-unverified-email=true'          
+          - '--insecure-oidc-allow-unverified-email=true'
+      - image: 'ghcr.io/ansible/community-ansible-dev-tools:latest'
+        imagePullPolicy: IfNotPresent
+        command:
+          - adt
+          - server
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000
+    initContainers:
+      - name: install-dynamic-plugins
+        image: '{{ "{{" }} include "backstage.image" . {{ "}}" }}'
+        command:
+          - ./install-dynamic-plugins.sh
+          - /dynamic-plugins-root
+        env:
+          - name: NPM_CONFIG_USERCONFIG
+            value: /opt/app-root/src/.npmrc.dynamic-plugins
+          - name: SKIP_INTEGRITY_CHECK
+            value: "true"
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: /dynamic-plugins-root
+            name: dynamic-plugins-root
+          - mountPath: /opt/app-root/src/dynamic-plugins.yaml
+            name: dynamic-plugins
+            readOnly: true
+            subPath: dynamic-plugins.yaml
+          - mountPath: /opt/app-root/src/.npmrc.dynamic-plugins
+            name: dynamic-plugins-npmrc
+            readOnly: true
+            subPath: .npmrc
+        workingDir: /opt/app-root/src
 
     appConfig:
       backend:
@@ -166,6 +224,14 @@ upstream:
         reading:
           allow:
             - host: '*.{{ ocp4_workload_redhat_developer_hub_apps_domain }}'
+            
+      ansible:
+        creatorService:
+          baseUrl: 127.0.0.1
+          port: '8000'
+        devSpacesBaseUrl: {{ ocp4_workload_redhat_developer_hub_devspaces_host }}
+        pahUrl: https://hub-ansible-automation-platform.{{ ocp4_workload_redhat_developer_hub_apps_domain }}
+        aapUrl: https://controller-ansible-automation-platform.{{ ocp4_workload_redhat_developer_hub_apps_domain }}
 
       integrations:
         gitlab:
