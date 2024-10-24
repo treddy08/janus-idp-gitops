@@ -276,6 +276,11 @@ upstream:
         environment: production
         providers:
           oauth2Proxy: {}
+        externalAccess:
+          - type: static
+            options:
+              token: "h5nbpC9Vgnp7uoQ3HkMDoa0ep2mjiV2D" # notsecret
+              subject: orchestrator
 
       signInPage: oauth2Proxy
 
