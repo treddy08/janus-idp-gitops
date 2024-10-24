@@ -279,7 +279,7 @@ upstream:
         externalAccess:
           - type: static
             options:
-              token: "h5nbpC9Vgnp7uoQ3HkMDoa0ep2mjiV2D" # notsecret
+              token: h5nbpC9Vgnp7uoQ3HkMDoa0ep2mjiV2D
               subject: orchestrator
 
       signInPage: oauth2Proxy
