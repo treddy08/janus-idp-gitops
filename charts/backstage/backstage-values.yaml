@@ -93,6 +93,62 @@ global:
                 mountPoints:
                   - importName: createAnsibleContentAction
                     mountPoint: entity.page.overview/cards
+{% if ocp4_workload_redhat_developer_hub_orchestrator_enabled %}
+      - disabled: false
+        package: "@redhat/backstage-plugin-orchestrator-backend-dynamic@1.2.0"
+        integrity: sha512-lyw7IHuXsakTa5Pok8S2GK0imqrmXe3z+TcL7eB2sJYFqQPkCP5la1vqteL9/1EaI5eI6nKZ60WVRkPEldKBTg==
+        pluginConfig:
+          orchestrator:
+            dataIndexService:
+              url: http://sonataflow-platform-data-index-service.sonataflow-infra
+      - disabled: false
+        package: "@redhat/backstage-plugin-orchestrator@1.2.0"
+        integrity: sha512-FhM13wVXjjF39syowc4RnMC/gKm4TRlmh8lBrMwPXAw1VzgIADI8H6WVEs837poVX/tYSqj2WhehwzFqU6PuhA==
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              janus-idp.backstage-plugin-orchestrator:
+                appIcons:
+                  - importName: OrchestratorIcon
+                    module: OrchestratorPlugin
+                    name: orchestratorIcon
+                dynamicRoutes:
+                  - importName: OrchestratorPage
+                    menuItem:
+                      icon: orchestratorIcon
+                      text: Orchestrator
+                    module: OrchestratorPlugin
+                    path: /orchestrator
+      - disabled: false
+        package: "@redhat/plugin-notifications-dynamic@1.2.0"
+        integrity: sha512-1mhUl14v+x0Ta1o8Sp4KBa02izGXHd+wsiCVsDP/th6yWDFJsfSMf/DyMIn1Uhat1rQgVFRUMg8QgrvbgZCR/w==
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              redhat.plugin-notifications:
+                dynamicRoutes:
+                  - importName: NotificationsPage
+                    menuItem:
+                      config:
+                        props:
+                          titleCounterEnabled: true
+                          webNotificationsEnabled: false
+                      importName: NotificationsSidebarItem
+                    path: /notifications
+      - disabled: false
+        package: "@redhat/plugin-signals-dynamic@1.2.0"
+        integrity: sha512-5tbZyRob0JDdrI97HXb7JqFIzNho1l7JuIkob66J+ZMAPCit+pjN1CUuPbpcglKyyIzULxq63jMBWONxcqNSXw==
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              redhat.plugin-signals: {}
+      - disabled: false
+        package: "@redhat/plugin-notifications-backend-dynamic@1.2.0"
+        integrity: sha512-pCFB/jZIG/Ip1wp67G0ZDJPp63E+aw66TX1rPiuSAbGSn+Mcnl8g+XlHLOMMTz+NPloHwj2/Tp4fSf59w/IOSw==
+      - disabled: false
+        package: "@redhat/plugin-signals-backend-dynamic@1.2.0"
+        integrity: sha512-DIISzxtjeJ4a9mX3TLcuGcavRHbCtQ5b52wHn+9+uENUL2IDbFoqmB4/9BQASaKIUSFkRKLYpc5doIkrnTVyrA==
+{% endif %}
 
 upstream:
   backstage:
@@ -209,7 +265,12 @@ upstream:
           port: 7007
           host: 0.0.0.0
         csp:
-          connect-src: ["'self'", 'http:', 'https:']
+{% if ocp4_workload_redhat_developer_hub_orchestrator_enabled %}
+          script-src: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
+          script-src-elem: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
+          script-src-elem: ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
+{% endif %}
+          connect-src: ["'self'", 'http:', 'https:', 'data:']
         cors:
           origin: https://{{ ocp4_workload_redhat_developer_hub_backstage_host }}
           methods: [GET, POST, PUT, DELETE]
@@ -224,7 +285,7 @@ upstream:
         reading:
           allow:
             - host: '*.{{ ocp4_workload_redhat_developer_hub_apps_domain }}'
-            
+
       ansible:
         creatorService:
           baseUrl: 127.0.0.1
