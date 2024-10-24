@@ -276,11 +276,13 @@ upstream:
         environment: production
         providers:
           oauth2Proxy: {}
+{% if ocp4_workload_redhat_developer_hub_orchestrator_enabled %}
         externalAccess:
           - type: static
             options:
               token: h5nbpC9Vgnp7uoQ3HkMDoa0ep2mjiV2D
               subject: orchestrator
+{% endif %}
 
       signInPage: oauth2Proxy
 
