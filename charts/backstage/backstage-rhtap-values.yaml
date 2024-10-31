@@ -136,7 +136,10 @@ upstream:
       - name: NODE_OPTIONS
         value: --no-node-snapshot
       - name: BACKEND_SECRET
-        value: "{{ '{{ randAlphaNum 24 | b64enc }}' }}"
+        valueFrom:
+          secretKeyRef:
+            name: backstage-redhat-developer-hub-auth
+            key: backend-secret
       - name: 'APP_CONFIG_app_baseUrl'
         value: 'https://{{ ocp4_workload_trusted_application_pipeline_backstage_host }}'
       - name: 'APP_CONFIG_backend_baseUrl'
@@ -203,6 +206,14 @@ upstream:
 
     appConfig:
       backend:
+{% if ocp4_workload_redhat_developer_hub_orchestrator_enabled %}
+        auth:
+          externalAccess:
+            - type: static
+              options:
+                token: ${BACKEND_SECRET}
+                subject: orchestrator
+{% endif %}
         listen:
           port: 7007
           host: 0.0.0.0
@@ -276,13 +287,6 @@ upstream:
         environment: production
         providers:
           oauth2Proxy: {}
-{% if ocp4_workload_redhat_developer_hub_orchestrator_enabled %}
-        externalAccess:
-          - type: static
-            options:
-              token: h5nbpC9Vgnp7uoQ3HkMDoa0ep2mjiV2D
-              subject: orchestrator
-{% endif %}
 
       signInPage: oauth2Proxy
 
