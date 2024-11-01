@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: backstage-internal
+  namespace: backstage
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 7007
+  internalTrafficPolicy: Cluster
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/component: backstage
+    app.kubernetes.io/instance: backstage
+    app.kubernetes.io/name: developer-hub
